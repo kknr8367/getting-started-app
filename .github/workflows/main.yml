@@ -11,15 +11,20 @@ jobs:
     steps:
      - name: Checkout code
        uses: actions/checkout@v3
-    
-     - name: Log in to Docker Hub
-       run: echo "${{ secrets.DOCKER_P }}" | docker login -u "${{ secrets.DOCKER_U }}" --password-stdin
 
-     - name: Build Docker image
-       run: docker build -t ${{ secrets.DOCKER_U }}/getting-started:v2 .
+     - name: Login to Docker
+       uses: docker/login-action@v3.3.0
+       with:
+        username: ${{secrets.DOCKER_U}}
+        password: ${{secrets.DOCKER_P}}
 
-     - name: Push Docker image
-       run: docker push ${{ secrets.DOCKER_U }}/getting-started:v2
-
+     - name: Build docker image
+       run: |
+        docker build -t ${{secrets.DOCKER_P}}/getting-started:v3 .
+        docker tag $DOCKER_IMAGE:${{github.sha}} $DOCKER_IMAGE:v3
+       
+     - name: Push docker image
+       run: |
+        docker push ${{secrets.DOCKER_P}}/getting-started:v3     
 
     
