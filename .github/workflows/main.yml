@@ -21,7 +21,6 @@ jobs:
      - name: Build docker image
        run: |
         docker build -t ${{secrets.DOCKER_P}}/getting-started:v3 .
-        docker tag $DOCKER_IMAGE:${{github.sha}} $DOCKER_IMAGE:v3
        
      - name: Push docker image
        run: |
