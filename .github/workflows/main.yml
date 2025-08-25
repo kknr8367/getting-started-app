@@ -19,7 +19,7 @@ jobs:
        run: docker build -t ${{ secrets.DOCKER_U }}/getting-started:v2 .
 
      - name: Push Docker image
-       run: docker push ${{ secrets.DOCKER_U }}/getting-started:v3
+       run: docker push ${{ secrets.DOCKER_U }}/getting-started:v2
 
 
     
